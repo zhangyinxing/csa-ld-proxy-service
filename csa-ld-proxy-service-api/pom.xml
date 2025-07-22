@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>csa-ld-proxy-service</artifactId>
+        <groupId>com.ux168</groupId>
+        <version>2025.0.1</version> <!-- 修改成父版本号 -->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>csa-ld-proxy-service-api</artifactId>
+    <!-- 以jar包的形式打包 -->
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- 跳过默认的deploy:deploy命令,不上传不带次版本的jar -->
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <!-- csa独立公共依赖 -->
+        <dependency>
+            <groupId>com.ux168</groupId>
+            <artifactId>ux168-csa-common</artifactId>
+        </dependency>
+        <!-- swagger依赖 -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <groupId>com.ux168</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}${version.suffix}</version>
+                            <packaging>jar</packaging>
+                            <file>target/${project.artifactId}-${project.version}${version.suffix}.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>deploy-file</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <!--对应maven配置文件setting.xml中的server标签中的id，即不同环境对应不同的
+                            账号密码
+                            开发阶段上传到snapshot仓库，上线阶段上传到release仓库 -->
+                            <repositoryId>${version.repository.id}</repositoryId>
+                            <url>${version.repository.url}</url>
+                            <groupId>com.ux168</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}${version.suffix}</version>
+                            <packaging>jar</packaging>
+                            <file>target/${project.artifactId}-${project.version}${version.suffix}.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

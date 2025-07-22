@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>csa-ld-proxy-service</artifactId>
+        <groupId>com.ux168</groupId>
+        <version>2025.0.1</version>  <!-- 修改成父版本号 -->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>csa-ld-proxy-service-biz</artifactId>
+    <!-- 以jar包的形式打包 -->
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ux168</groupId>
+            <artifactId>csa-ld-proxy-service-api</artifactId>
+        </dependency>
+        <!-- 启动jar包 -->
+        <dependency>
+            <groupId>com.ux168</groupId>
+            <artifactId>ux168-commons-starter</artifactId>
+        </dependency>
+        <!-- pgsql驱动 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- Mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <groupId>com.ux168</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}${version.suffix}</version>
+                            <packaging>jar</packaging>
+                            <file>target/${project.artifactId}-${project.version}${version.suffix}.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
