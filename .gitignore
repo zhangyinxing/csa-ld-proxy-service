@@ -2,3 +2,4 @@
 /csa-ld-proxy-service-biz/target/
 /csa-ld-proxy-service-boot/target/
 /.idea/
+*.iml
