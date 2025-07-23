@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @ApiModel("商品档案bom信息查询条件")
 public class GetBomInfoReqDTO {
 
-    @ApiModelProperty("大货款号")
+    @ApiModelProperty("大货款号1")
     @NotBlank(message = "massCode1必传")
     private String massCode;
 }
