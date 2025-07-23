@@ -37,6 +37,15 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ux168</groupId>
+            <artifactId>ux168-client-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ux168</groupId>
+            <artifactId>ux168-file-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
